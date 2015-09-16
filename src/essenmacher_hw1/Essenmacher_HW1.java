@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 
 /**
  *
@@ -54,7 +55,7 @@ public class Essenmacher_HW1 extends Application {
         sizeColumn.setCellValueFactory(new PropertyValueFactory<Pizza, String>("size"));
         TableColumn<Pizza, String> toppingsColumn = new TableColumn<Pizza, String>("Toppings");
         toppingsColumn.setCellValueFactory(new PropertyValueFactory<Pizza, String>("toppings"));
-        TableColumn<Pizza, String> priceColumn = new TableColumn<Pizza, String>("Price");
+        TableColumn<Pizza, String> priceColumn = new TableColumn<Pizza, String>("Price ($)");
         priceColumn.setCellValueFactory(new PropertyValueFactory<Pizza, String>("price"));
         TableColumn<Pizza, String> nameColumn = new TableColumn<Pizza, String>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<Pizza, String>("lastName"));
@@ -76,12 +77,16 @@ public class Essenmacher_HW1 extends Application {
         
         cmbFlavor.getItems().addAll("Pepperoni", "Hawaiian", "Veggie", 
                 "Meat", "Special");
+        cmbFlavor.setValue("Flavor");
         cmbSize.getItems().addAll("Small", "Medium", "Large");
+        cmbSize.setValue("Size");
         cmbToppings.getItems().addAll("Extra Cheese", "Green Pepper", "Onion",
                 "Mushroom", "Black Olive", "Tomato", "Jalapeno Peppers");
+        cmbToppings.setValue("Toppings");
         
         //Creating HBox for order row of grid
         HBox hboxOrder = new HBox();
+        hboxOrder.setAlignment(Pos.CENTER);
         
         //Creating button for ordering
         Button btnOrder = new Button("Place Order");
@@ -90,6 +95,17 @@ public class Essenmacher_HW1 extends Application {
             
             @Override
             public void handle(ActionEvent event) {
+                //Alert the user if no selection was made
+                if(cmbFlavor.getValue() == "Flavor" || cmbSize.getValue() == "Size"
+                        || cmbToppings.getValue() == "Toppings"
+                        || txtLastName.getText().equals("")) {
+                    Alert noSelection = new Alert(Alert.AlertType.WARNING, 
+                            "You must make a selection and enter your name!");
+                    noSelection.setTitle("Not so fast!");
+                    noSelection.show();
+                    return;
+                }
+                
                 Pizza pizza = new Pizza(cmbFlavor.getValue(), 
                         cmbSize.getValue(), cmbToppings.getValue(),
                         txtLastName.getText());
@@ -117,9 +133,9 @@ public class Essenmacher_HW1 extends Application {
                 
                 //Clearing out the order screen
                 txtLastName.setText("");
-                cmbFlavor.setValue("");
-                cmbSize.setValue("");
-                cmbToppings.setValue("");
+                cmbFlavor.setValue("Flavor");
+                cmbSize.setValue("Size");
+                cmbToppings.setValue("Toppings");
             }
         });
         
@@ -127,10 +143,12 @@ public class Essenmacher_HW1 extends Application {
         //Adding elements to the HBox for name row
         hboxLastName.getChildren().add(lblLastName);
         hboxLastName.getChildren().add(txtLastName);
+        hboxLastName.setAlignment(Pos.CENTER);
         
         //Adding elements to the HBox for toppings row
         hboxToppings.getChildren().addAll(cmbFlavor, cmbSize, cmbToppings,
                 lblTotalPrice);
+        hboxToppings.setAlignment(Pos.CENTER);
         
         //Adding elements to HBox for order row
         hboxOrder.getChildren().add(btnOrder);
@@ -142,17 +160,20 @@ public class Essenmacher_HW1 extends Application {
         
         //Adding the GridPane to the orderTab
         orderTab.setContent(rootGrid);
+        rootGrid.setAlignment(Pos.CENTER);
+        rootGrid.setVgap(10);
         
         //Adding the orderTable to the viewTab
         rootViewPane.setCenter(orderTable);
         viewTab.setContent(rootViewPane);
+        rootViewPane.autosize();
         
         //Adding the tabs to the Tab Pane
         rootTab.getTabs().add(orderTab);
         rootTab.getTabs().add(viewTab);
         
         //Creating main scene and adding stylesheet
-        Scene scene = new Scene(rootTab, 500, 300);
+        Scene scene = new Scene(rootTab, 500, 200);
         String css = Essenmacher_HW1.class.getResource("pizzaOrderStyle.css").toExternalForm();
         scene.getStylesheets().add(css);
         

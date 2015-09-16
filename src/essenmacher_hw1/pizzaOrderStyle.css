@@ -4,7 +4,7 @@
     This style sheet is used to style a pizza order GUI built with JavaFx
 */
 
-.root{
+.root {
     -fx-font: bold 16px "arial"; 
     -fx-font-color: white;
     -fx-base: #000000;
@@ -16,45 +16,10 @@
     -fx-font: bold 18px "arial";
     -fx-text-fill: black;
     -fx-padding: 10;
-    }
+    -fx-alignment: center;
+}
     
 .label {
     -fx-font-size: 12px;
     -fx-label-padding: 10 5 10 5;
 }
-
-.grid-pane {
-    -fx-vgap: 10px;
-    -fx-grid-lines-visible: true;
-}
-
-.h-box {
-    -fx-spacing: 20px;
-}
-
-/*
-.table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color: 
-        transparent
-        transparent
-        derive(-fx-base, 80%) 
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-*/
