@@ -2,18 +2,15 @@ package essenmacher_hw1;
 
 import java.math.BigDecimal;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author phile
+ * @author Phil Essenmacher
+ * 
+ * This class is used to simulate a pizza order with various
+ * properties, such as size, flavor, toppings, and name
  */
 public class Pizza {
-    private String flavor, size, toppings, lastName;
+    public String flavor, size, toppings, lastName;
     
     //Flavor prices
     private final static double PEP = 5.00;
@@ -34,7 +31,13 @@ public class Pizza {
     //Sales tax
     private final static double TAX_RATE = 1.06;
 
-    
+    Pizza(){
+        flavor = "none";
+        size = "none";
+        toppings = "none";
+        lastName = "none";
+    }
+
     Pizza(String inFlavor, String inSize, String inToppings, 
             String inLastName){
         flavor = inFlavor;
