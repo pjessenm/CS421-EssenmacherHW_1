@@ -4,6 +4,7 @@
  * Course, semester: CS 421
  * Instructor: Cho
  * Date Finished: 9.15.15
+ * Java SDK: 8.0.6
  */
 package essenmacher_hw1;
 
@@ -139,6 +140,29 @@ public class Essenmacher_HW1 extends Application {
             }
         });
         
+        //Creating button for adding pizza to order
+        Button btnAdd = new Button("Add Pizza");
+        
+        //Anonymous class for handling button event
+        btnAdd.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                if(cmbFlavor.getValue() == "Flavor" || cmbSize.getValue() == "Size"
+                        || cmbToppings.getValue() == "Toppings"
+                        || txtLastName.getText().equals("")) {
+                    Alert noSelection = new Alert(Alert.AlertType.WARNING, 
+                            "You must make a selection and enter your name!");
+                    noSelection.setTitle("Not so fast!");
+                    noSelection.show();
+                    return;
+                }
+                
+                Pizza pizza = new Pizza(cmbFlavor.getValue(), 
+                        cmbSize.getValue(), cmbToppings.getValue(),
+                        txtLastName.getText());
+            }
+        });
   
         //Adding elements to the HBox for name row
         hboxLastName.getChildren().add(lblLastName);
@@ -151,7 +175,9 @@ public class Essenmacher_HW1 extends Application {
         hboxToppings.setAlignment(Pos.CENTER);
         
         //Adding elements to HBox for order row
+        hboxOrder.getChildren().add(btnAdd);
         hboxOrder.getChildren().add(btnOrder);
+        hboxOrder.setSpacing(10);
         
         //Adding the HBoxes to the GridPane
         rootGrid.add(hboxLastName, 0, 0);
